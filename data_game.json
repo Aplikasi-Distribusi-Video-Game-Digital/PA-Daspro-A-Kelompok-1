@@ -2,9 +2,17 @@
     {
         "nama": "Mobile Legends",
         "rilis": "2017",
-        "pengembang": "Montoon",
+        "pengembang": "iyas",
         "genre": "Mystery",
-        "Deskripsi": "Banyak dark sistem",
+        "deskripsi": "Banyak dark sistem",
         "harga": "20000000"
+    },
+    {
+        "nama": "iyas",
+        "rilis": "3009",
+        "pengembang": "iyas",
+        "genre": "iyas",
+        "deskripsi": "iyas",
+        "harga": "iyas"
     }
 ]

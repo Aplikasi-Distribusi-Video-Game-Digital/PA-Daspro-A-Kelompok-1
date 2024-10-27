@@ -3,31 +3,31 @@ from prettytable import PrettyTable
 
 print('☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬')
 
+def load_data():
+    with open("data_user.json", "r") as json_user:
+        data_user = json.load(json_user)
+    with open("data_game.json", "r") as json_game:
+        data_game = json.load(json_game)
+    return data_user, data_game
+
+def simpan_data(data_user, data_game):
+    with open("data_user.json", "w") as json_user:
+        json.dump(data_user, json_user, indent=4)
+    with open("data_game.json", "w") as json_game:
+        json.dump(data_game, json_game, indent=4)
+
 def login():
-    users = load_data("data_user.json")
+    users, games = load_data()
     username = input('Masukkan Username Anda: ')
     password = input('Masukkan Password Anda: ')
 
     for user in users:
         if user['username'] == username and user['password'] == password:
             print(f'Login Berhasil! Selamat Datang {username}')
-            return True
+            return user['role']
         
     print("Username atau Password Anda Salah")
-    return False
-
-def load_data():
-    with open("data_user.json", "r") as json_user:
-        data_user = json.load(json_user)
-    with open("data_game.json", "r") as json_game:
-        data_game = json.loads(json_game)
-    return data_user, data_game
-
-def simpan_data(data_user, data_game):
-    with open("data_user.json", "w") as json_user:
-        json.dump(data_user, json_user)
-    with open("data_game.json", "w") as json_game:
-        json.dump(data_game, json_game)
+    return None
 
 def regristasi_pengguna_baru(username, password):
     print('\n========== Regristasi Pengguna Baru ==========')
@@ -42,7 +42,8 @@ def regristasi_pengguna_baru(username, password):
 
 
 table = PrettyTable()
-table.field_names = ['Nama Game', 'Tanggal Rilis Game', 'Pengembang Game', 'Genre Game', 'Deskripsi Game'] #
+table.field_names = ['Nomor', 'Nama Game', 'Tanggal Rilis Game', 'Pengembang Game', 'Genre Game', 'Deskripsi Game', 'Harga']
+
 def game_list(nama, rilis, pengembang, genre, deskripsi):   
     nomor = len(table._rows) + 1
     table.add_row([nomor, nama, rilis, pengembang, genre, deskripsi])
@@ -54,6 +55,7 @@ def menu_admin():
         print('2. Lihat Aplikasi Video Game ')
         print('3. Perbarui Aplikasi Video Game ')
         print('4. Hapus Aplikasi Video Game ')
+        print('5. Keluar ')
         pilihan = input('Silahkan Masukkan Pilihan Anda: ')
         if pilihan == '1':
             tambah_game()
@@ -64,6 +66,22 @@ def menu_admin():
         elif pilihan == '4':
             hapus_game()
         elif pilihan == '5':
+            break
+        else:
+            print('Pilihan Tidak Tersedia')
+
+def menu_user():
+    while True:
+        print('\n========== MENU USER ==========') 
+        print('1. Lihat Daftar Game')
+        print('2. Beli Game')
+        print('3. Keluar')
+        pilihan = input('Silahkan Masukkan Pilihan Anda: ')
+        if pilihan == '1':
+            lihat_game()
+        elif pilihan == '2':
+            beli_game()
+        elif pilihan == '3':
             break
         else:
             print('Pilihan Tidak Tersedia')
@@ -126,3 +144,15 @@ def hapus_game():
         pilihan = input('Apakah Anda Ingin Menghapus Lagi? (YA/TIDAK): ')
         if pilihan == 'TIDAK':
             break
+
+def beli_game():
+    None #Jangan diapa apain dulu ya manis
+
+# Main Program
+role = login()
+if role == 'admin':
+    menu_admin()
+elif role == 'user':
+    menu_user()
+else:
+    print("Akses Ditolak.")

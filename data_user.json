@@ -1,10 +1,12 @@
 [
     {
         "username": "group1",
-        "password": "thebest"
+        "password": "thebest",
+        "role": "admin"
     },
     {
         "username": "user1",
-        "password": "12345"
+        "password": "12345",
+        "role": "user"
     }
 ]
