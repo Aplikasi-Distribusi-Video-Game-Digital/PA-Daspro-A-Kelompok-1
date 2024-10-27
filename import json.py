@@ -3,47 +3,70 @@ from prettytable import PrettyTable
 
 print('☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬')
 
-def load_data():
-    with open("data_user.json", "r") as json_user:
-        data_user = json.load(json_user)
-    with open("data_game.json", "r") as json_game:
-        data_game = json.load(json_game)
-    return data_user, data_game
-
-def simpan_data(data_user, data_game):
-    with open("data_user.json", "w") as json_user:
-        json.dump(data_user, json_user, indent=4)
-    with open("data_game.json", "w") as json_game:
-        json.dump(data_game, json_game, indent=4)
+namafileakun = 'data_user.json'
 
 def login():
-    users, games = load_data()
+    while True:
+        print('\n========== LOGIN ==========')
+        print('1. Sudah Punya Akun')
+        print('2. Belum Memiliki Akun')
+        pilihan_akun = input('Silahkan Pilih Login: ')
+        if pilihan_akun == "1":
+            ada_akun()
+            return
+        elif pilihan_akun == '2':
+            belum_ada_akun()
+            return
+        else:
+            print('Pilihan Tidak Valid.')
+
+def ada_akun():
     username = input('Masukkan Username Anda: ')
     password = input('Masukkan Password Anda: ')
 
-    for user in users:
-        if user['username'] == username and user['password'] == password:
-            print(f'Login Berhasil! Selamat Datang {username}')
-            return user['role']
-        
-    print("Username atau Password Anda Salah")
-    return None
+    try:
+        file_akun = open(namafileakun, "r")
+        data = json.loads(file_akun.read())
+        file_akun.close()
+    except FileNotFoundError:
+        print('Akun pengguna tidak ditemukan. Silahkan registrasi dahulu.')
+        return
 
-def regristasi_pengguna_baru(username, password):
-    print('\n========== Regristasi Pengguna Baru ==========')
-    users = load_data("data_user.json")
-    for user in users:
-        if user['username'] == username:
-            print('Username Sudah Digunakan!')
-            return
-    users.append({'username': username, 'password': password})
-    simpan_data('data_user.json', users)
-    print(f'Regristasi Berhasil! Selamat Datang, {users}')
+def username_terpakai(data, regis_username):
+    for user in data:
+        if user['regis_username'] == regis_username:
+            return True
+    return False
+
+def belum_ada_akun():
+    try:
+        file_akun = open(namafileakun, "r")
+        data = json.loads(file_akun.read())
+        file_akun.close()
+    except FileNotFoundError:
+        data = []
+    
+    while True:
+        regis_username = input('Masukkan Username Anda: ')
+        password = input('Masukkan Password Anda: ')
+        if username_terpakai(data, regis_username):
+            print('Username telah terpakai. Silahkan masukkan username lain')
+        else:
+            break
+    
+    akun_baru = {
+        "username": regis_username,
+        "password": password
+    }
+    data.append(akun_baru)
+    with open("namafileakun", "w") as file:
+        json.dump(data, file, indent=4)
+    print("Berhasil Membuat Akun")
+    ada_akun()
 
 
 table = PrettyTable()
-table.field_names = ['Nomor', 'Nama Game', 'Tanggal Rilis Game', 'Pengembang Game', 'Genre Game', 'Deskripsi Game', 'Harga']
-
+table.field_names = ['Nama Game', 'Tanggal Rilis Game', 'Pengembang Game', 'Genre Game', 'Deskripsi Game'] #
 def game_list(nama, rilis, pengembang, genre, deskripsi):   
     nomor = len(table._rows) + 1
     table.add_row([nomor, nama, rilis, pengembang, genre, deskripsi])
@@ -55,7 +78,6 @@ def menu_admin():
         print('2. Lihat Aplikasi Video Game ')
         print('3. Perbarui Aplikasi Video Game ')
         print('4. Hapus Aplikasi Video Game ')
-        print('5. Keluar ')
         pilihan = input('Silahkan Masukkan Pilihan Anda: ')
         if pilihan == '1':
             tambah_game()
@@ -66,22 +88,6 @@ def menu_admin():
         elif pilihan == '4':
             hapus_game()
         elif pilihan == '5':
-            break
-        else:
-            print('Pilihan Tidak Tersedia')
-
-def menu_user():
-    while True:
-        print('\n========== MENU USER ==========') 
-        print('1. Lihat Daftar Game')
-        print('2. Beli Game')
-        print('3. Keluar')
-        pilihan = input('Silahkan Masukkan Pilihan Anda: ')
-        if pilihan == '1':
-            lihat_game()
-        elif pilihan == '2':
-            beli_game()
-        elif pilihan == '3':
             break
         else:
             print('Pilihan Tidak Tersedia')
@@ -145,14 +151,4 @@ def hapus_game():
         if pilihan == 'TIDAK':
             break
 
-def beli_game():
-    None #Jangan diapa apain dulu ya manis
-
-# Main Program
-role = login()
-if role == 'admin':
-    menu_admin()
-elif role == 'user':
-    menu_user()
-else:
-    print("Akses Ditolak.")
+login()
