@@ -4,12 +4,13 @@ from prettytable import PrettyTable
 print('☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬')
 
 namafileakun = 'data_user.json'
+namafikeakun = 'data_game.json'
 
 def login():
     while True:
         print('\n========== LOGIN ==========')
-        print('1. Sudah Punya Akun')
-        print('2. Belum Memiliki Akun')
+        print('1. Login')
+        print('2. Sign Up')
         pilihan_akun = input('Silahkan Pilih Login: ')
         if pilihan_akun == "1":
             ada_akun()
