@@ -1,34 +1,26 @@
-[
-    {
-        "nama": "iyas",
-        "rilis": "iyastama",
-        "pengembang": "iyas",
-        "genre": "iyas",
-        "deskripsi": "utas",
-        "harga": "iyas"
-    },
+[]
     {
         "nama": "Mobile Legends",
         "rilis": "2017",
-        "pengembang": "iyas",
-        "genre": "Mystery",
-        "deskripsi": "Banyak dark sistem",
-        "harga": "20000000"
-    },
-    {
-        "nama": "epep",
-        "rilis": "2017",
-        "pengembang": "garena",
-        "genre": "penembakan sekolah",
-        "deskripsi": "pintu",
-        "harga": "20000"
-    },
-    {
-        "nama": "Hogwarts Legacy",
-        "rilis": "2023",
-        "pengembang": "Warner Bros",
-        "genre": "Fantasy",
-        "deskripsi": "Asik",
-        "harga": "500000"
-    }
+    "pengembang": "iyas",
+    "genre": "Mystery",
+    "deskripsi": "Banyak dark sistem",
+    "harga": "20000000"
+},
+{
+    "nama": "epep",
+    "rilis": "2017",
+    "pengembang": "garena",
+    "genre": "penembakan sekolah",
+    "deskripsi": "pintu",
+    "harga": "20000"
+},
+{
+    "nama": "Hogwarts Legacy",
+    "rilis": "2023",
+    "pengembang": "Warner Bros",
+    "genre": "Fantasy",
+    "deskripsi": "Asik",
+    "harga": "500000"
+}
 ]

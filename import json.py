@@ -112,13 +112,14 @@ def menu_admin():
             print('Pilihan Tidak Tersedia')
 
 def tambah_game():
-   
-    with open(namafilegame, "r") as file_game:
-        content = file_game.read().strip()
-        data_games = json.load(file_game) if file_game.read() else []
+    try:
+        with open(namafilegame, "r") as file_game:
+            content = file_game.read().strip()
+            data_games = json.loads(content) if content else []
+    except FileNotFoundError:
+        data_games = []
 
     while True:
-       
         nama = input('Masukkan Nama Game: ')
         rilis = input('Masukkan Tanggal Rilis Game: ')
         pengembang = input('Masukkan Nama Pengembang Game: ')
