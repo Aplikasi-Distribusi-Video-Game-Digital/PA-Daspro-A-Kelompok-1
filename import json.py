@@ -1,5 +1,6 @@
 import json
 import pwinput
+import os
 from prettytable import PrettyTable
 
 print('☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬')
@@ -12,6 +13,7 @@ def login():
         print('\n========== LOGIN ==========')        
         print('1. Sign In')
         print('2. Sign Up')
+        print('3. Keluar Program')
         pilihan_akun = input('Silahkan Pilih Login: ')
         if pilihan_akun == "1":
             ada_akun()
@@ -19,6 +21,8 @@ def login():
         elif pilihan_akun == '2':
             belum_ada_akun()
             return
+        elif pilihan_akun == '3':
+            exit()
         else:
             print('Pilihan Tidak Valid.')
 
@@ -40,6 +44,7 @@ def ada_akun():
                 menu_admin()
             else:
                 print(f"Selamat datang, {username}!")
+                menu_pengguna()
             return
     print("Username atau password salah.")
 
@@ -87,12 +92,15 @@ def game_list(nama, rilis, pengembang, genre, deskripsi):
 
 def menu_admin():
     while True:
-        print('\n========== MENU ADMIN ==========')        
-        print('1. Tambah Aplikasi Video Game ')
-        print('2. Lihat Aplikasi Video Game ')
-        print('3. Perbarui Aplikasi Video Game ')
-        print('4. Hapus Aplikasi Video Game ')
-        print('5. Keluar')
+        print('=====================================')        
+        print('|        🎀 MENU ADMIN 🎀           |')        
+        print('=====================================')        
+        print('|   1. Tambah Aplikasi Video Game   |')
+        print('|   2. Lihat Aplikasi Video Game    |')
+        print('|   3. Perbarui Aplikasi Video Game |')
+        print('|   4. Hapus Aplikasi Video Game    |')
+        print('|   5. Keluar Akun                  |')
+        print('=====================================')     
         pilihan = input('Silahkan Masukkan Pilihan Anda: ')
         if pilihan == '1':
             tambah_game()
@@ -108,13 +116,11 @@ def menu_admin():
             print('Pilihan Tidak Tersedia')
 
 def tambah_game():
-   
     with open(namafilegame, "r") as file_game:
         content = file_game.read().strip()
         data_games = json.load(file_game) if file_game.read() else []
 
     while True:
-       
         nama = input('Masukkan Nama Game: ')
         rilis = input('Masukkan Tanggal Rilis Game: ')
         pengembang = input('Masukkan Nama Pengembang Game: ')
@@ -196,4 +202,67 @@ def hapus_game():
         if pilihan.upper() == 'TIDAK':
             break
 
+def menu_pengguna():
+    while True:
+        os.system('cls')
+        print('=====================================')        
+        print('|        🎀 MENU PENGGUNA 🎀        |')        
+        print('=====================================')        
+        print('|          1. Searching             |')
+        print('|          2. Sorting               |')
+        print('|          3. Cek Akun              |')
+        print('|          4. Cek Saldo             |')
+        print('|          5. Keluar Akun           |')
+        print('=====================================')        
+        pilihan = input('Silahkan Masukkan Pilihan Anda: ')
+        if pilihan == '1':
+            tambah_game()
+        elif pilihan == '2':
+            lihat_game()
+        elif pilihan == '3':
+            cek_akun()
+        elif pilihan == '4':
+            cek_saldo()
+        elif pilihan == '5':
+            konfirmasi = input('Apakah ingin keluar akun (YA/TIDAK): ')
+            if konfirmasi.upper() == 'YA':
+                login()
+            else:
+                menu_pengguna()
+        else:
+            print('Pilihan Tidak Tersedia')
+
+def cek_saldo():
+    while True:
+            with open(namafileakun, "r") as file_akun:
+                data_akuns = json.load(file_akun)
+                for game in data_akuns:
+                    game_list(
+                        game.get("saldo")
+                    )
+
+
+def cek_akun():
+    while True:
+        print('\n========== AKUN ==========')        
+        print('1. Lihat Akun ')
+        print('2. Lihat game ')
+        print('3. Hapus Akun ')
+        try:
+            pilihan = input("Silahkan Masukkan Pilihan Anda: ")
+            if pilihan == "1":
+                lihat_akun()
+            elif pilihan == "2":
+                game_dibeli()
+            elif pilihan == "3":
+                hapus_akun()
+            else:
+                print("Pilihan tidak tersedia")
+        except ValueError:
+            print("Pilihan tidak sesuai \nSilahkan Masukkan Pilihan Anda Kembali")
+
+
 login()
+
+
+
