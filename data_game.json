@@ -16,14 +16,6 @@
         "harga": "20000000"
     },
     {
-        "nama": "iyas",
-        "rilis": "3009",
-        "pengembang": "iyas",
-        "genre": "iyas",
-        "deskripsi": "iyas",
-        "harga": "iyas"
-    },
-    {
         "nama": "epep",
         "rilis": "2017",
         "pengembang": "garena",
@@ -40,4 +32,3 @@
         "harga": "500000"
     }
 ]
-

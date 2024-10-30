@@ -1,5 +1,6 @@
 import json
 import pwinput
+import os
 from prettytable import PrettyTable
 
 print('☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬')
@@ -12,6 +13,7 @@ def login():
         print('\n========== LOGIN ==========')        
         print('1. Sign In')
         print('2. Sign Up')
+        print('3. Keluar Program')
         pilihan_akun = input('Silahkan Pilih Login: ')
         if pilihan_akun == "1":
             ada_akun()
@@ -19,6 +21,8 @@ def login():
         elif pilihan_akun == '2':
             belum_ada_akun()
             return
+        elif pilihan_akun == '3':
+            exit()
         else:
             print('Pilihan Tidak Valid.')
 
@@ -160,40 +164,110 @@ def lihat_game():
         print("Data game tidak ditemukan.")
 
 def perbarui_game():
-    lihat_game()
-    print('\n==========Perbarui Game==========')
-    while True:
-        nomor = int(input('Masukkan Nomor Game Yang Ingin Diperbarui: '))
-        for row in table._rows:
-            if row[0] == nomor:
-                nama = input('Masukkan Nama Game (kosongkan jika tidak ada): ') or row[1]
-                rilis = input('Masukkan Tanggal Rilis Game (kosongkan jika tidak ada): ') or row[2]
-                pengembang = input('Masukkan Nama Pengembang Game (kosongkan jika tidak ada): ') or row[3]
-                genre = input('Masukkan Genre Game (kosongkan jika tidak ada): ') or row[4]
-                deskripsi = input('Masukkan Deskripsi Game (kosongkan jika tidak ada): ') or row[5]
-                row[1], row[2], row[3], row[4], row[5] = nama, rilis, pengembang, genre, deskripsi
-                print(f'Game dengan nomor {nomor} berhasil diperbarui')
-                return
-        else:
-            print(f'Game dengan nomor {nomor} tidak ditemukan')
-            print('-------------------------------------')
+    with open(namafilegame, "r") as file_game:
+        data_games = json.load(file_game)
+
+    lihat_game() 
+    print('\n========== Perbarui Game ==========')
+    
+    nomor = int(input('Masukkan Nomor Game Yang Ingin Diperbarui: ')) - 1  
+    if 0 <= nomor < len(data_games):
+        game = data_games[nomor]
+        
+        game["nama"] = input('Masukkan Nama Game (kosongkan jika tidak ada perubahan): ') or game["nama"]
+        game["rilis"] = input('Masukkan Tanggal Rilis Game (kosongkan jika tidak ada perubahan): ') or game["rilis"]
+        game["pengembang"] = input('Masukkan Nama Pengembang Game (kosongkan jika tidak ada perubahan): ') or game["pengembang"]
+        game["genre"] = input('Masukkan Genre Game (kosongkan jika tidak ada perubahan): ') or game["genre"]
+        game["deskripsi"] = input('Masukkan Deskripsi Game (kosongkan jika tidak ada perubahan): ') or game["deskripsi"]
+        game["harga"] = input('Masukkan Harga Game (kosongkan jika tidak ada perubahan): ') or game["harga"]
+
+        print(f'Game dengan nomor {nomor + 1} berhasil diperbarui.')
+
+        with open(namafilegame, "w") as file_game:
+            json.dump(data_games, file_game, indent=4)
+    else:
+        print(f'Game dengan nomor {nomor + 1} tidak ditemukan.')
 
 def hapus_game():
+    with open(namafilegame, "r") as file_game:
+        data_games = json.load(file_game)
     lihat_game()
-    print('\n==========Hapus Game==========')
-    while True:
-        nomor = int(input('Masukkan Nomor Game Yang Ingin Dihapus: '))
-        for row in table._rows:
-            if row[0] == nomor:
-                table._rows.remove(row)
-                print('=========================================')
-                print(f'Game dengan nomor {nomor} berhasil dihapus')
-                break
+    print('\n========== Hapus Game ==========')
+    
+    nomor = int(input('Masukkan Nomor Game Yang Ingin Dihapus: ')) - 1 
+    if 0 <= nomor < len(data_games):
+        game_pilih = data_games[nomor]
+        nama_game = game_pilih["nama"]
+        konfirmasi = input(f'Apakah Anda yakin ingin menghapus game "{nama_game}"? (YA/TIDAK): ')
+        
+        if konfirmasi.upper() == 'YA':
+            data_games.remove(game_pilih)
+            print(f'Game "{nama_game}" berhasil dihapus.')
+
+            with open(namafilegame, "w") as file_game:
+                json.dump(data_games, file_game, indent=4)
         else:
-            print(f'Game dengan nomor {nomor} tidak ditemukan')
-        print('----------------------------------------')
-        pilihan = input('Apakah Anda Ingin Menghapus Lagi? (YA/TIDAK): ')
-        if pilihan.upper() == 'TIDAK':
-            break
+            print("Penghapusan dibatalkan.")
+    else:
+        print(f'Game dengan nomor {nomor + 1} tidak ditemukan.')
+
+def menu_pengguna():
+    while True:
+        os.system('cls')
+        print('=====================================')        
+        print('|        🎀 MENU PENGGUNA 🎀        |')        
+        print('=====================================')        
+        print('|          1. Searching             |')
+        print('|          2. Sorting               |')
+        print('|          3. Cek Akun              |')
+        print('|          4. Cek Saldo             |')
+        print('|          5. Keluar Akun           |')
+        print('=====================================')        
+        pilihan = input('Silahkan Masukkan Pilihan Anda: ')
+        if pilihan == '1':
+            tambah_game()
+        elif pilihan == '2':
+            lihat_game()
+        elif pilihan == '3':
+            cek_akun()
+        elif pilihan == '4':
+            cek_saldo()
+        elif pilihan == '5':
+            konfirmasi = input('Apakah ingin keluar akun (YA/TIDAK): ')
+            if konfirmasi.upper() == 'YA':
+                login()
+            else:
+                menu_pengguna()
+        else:
+            print('Pilihan Tidak Tersedia')
+
+def cek_saldo():
+    while True:
+            with open(namafileakun, "r") as file_akun:
+                data_akuns = json.load(file_akun)
+                for game in data_akuns:
+                    game_list(
+                        game.get("saldo")
+                    )
+
+
+def cek_akun():
+    while True:
+        print('\n========== AKUN ==========')        
+        print('1. Lihat Akun ')
+        print('2. Lihat game ')
+        print('3. Hapus Akun ')
+        try:
+            pilihan = input("Silahkan Masukkan Pilihan Anda: ")
+            if pilihan == "1":
+                lihat_akun()
+            elif pilihan == "2":
+                game_dibeli()
+            elif pilihan == "3":
+                hapus_akun()
+            else:
+                print("Pilihan tidak tersedia")
+        except ValueError:
+            print("Pilihan tidak sesuai \nSilahkan Masukkan Pilihan Anda Kembali")
 
 login()
