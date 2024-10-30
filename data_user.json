@@ -2,17 +2,14 @@
     {
         "username": "group1",
         "password": "thebest",
+        "telepon": "telepon",
         "role": "admin"
     },
     {
         "username": "user1",
         "password": "12345",
-        "role": "user"
-    },
-    {
-        "username": "iyas",
-        "password": "iyastama",
-        "email": "iyas@iyas.com",
+        "telepon": "08123456778",
+        "saldo": 0,
         "role": "user"
     }
 ]

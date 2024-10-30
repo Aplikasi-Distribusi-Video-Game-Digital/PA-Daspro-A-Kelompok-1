@@ -1,6 +1,7 @@
 import json
 import pwinput
 import os
+import time 
 from prettytable import PrettyTable
 
 print('☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬')
@@ -17,10 +18,8 @@ def login():
         pilihan_akun = input('Silahkan Pilih Login: ')
         if pilihan_akun == "1":
             ada_akun()
-            return
         elif pilihan_akun == '2':
             belum_ada_akun()
-            return
         elif pilihan_akun == '3':
             exit()
         else:
@@ -42,6 +41,8 @@ def ada_akun():
             print("Login berhasil!")
             if user.get("role") == "admin":
                 menu_admin()
+            elif user.get("role") == "user":
+                menu_pengguna()
             else:
                 print(f"Selamat datang, {username}!")
             return
@@ -63,7 +64,7 @@ def belum_ada_akun():
     while True:
         regis_username = input('Masukkan Username Anda: ')
         password = pwinput.pwinput('Masukkan Password Anda: ')
-        email = input('Masukkan Email Anda: ')
+        telepon = input('Masukkan Telepon Anda: ')
 
         if username_terpakai(data, regis_username):
             print('Username telah terpakai. Silahkan masukkan username lain.')
@@ -73,7 +74,7 @@ def belum_ada_akun():
     akun_baru = {
         "username": regis_username,
         "password": password,
-        "email": email,
+        "telepon": telepon,
         "role": "user"
     }
     data.append(akun_baru)
@@ -114,8 +115,8 @@ def menu_admin():
 def tambah_game():
     try:
         with open(namafilegame, "r") as file_game:
-            content = file_game.read().strip()
-            data_games = json.loads(content) if content else []
+            baca = file_game.read().strip()
+            data_games = json.loads(baca) if baca else []
     except FileNotFoundError:
         data_games = []
 
@@ -226,9 +227,9 @@ def menu_pengguna():
         print('=====================================')        
         pilihan = input('Silahkan Masukkan Pilihan Anda: ')
         if pilihan == '1':
-            tambah_game()
+            searching()
         elif pilihan == '2':
-            lihat_game()
+            sorting()
         elif pilihan == '3':
             cek_akun()
         elif pilihan == '4':
@@ -244,12 +245,22 @@ def menu_pengguna():
 
 def cek_saldo():
     while True:
-            with open(namafileakun, "r") as file_akun:
-                data_akuns = json.load(file_akun)
-                for game in data_akuns:
-                    game_list(
-                        game.get("saldo")
+        with open(namafileakun, "r") as file_akun:
+            data_akuns = json.load(file_akun)
+        for akun in data_akuns:
+                akun(
+                    akun.get("saldo")                    
                     )
+        print('========== TOP UP Saldo ==========')
+        topup = int(input('Masukkan nominal top up e-Money: '))
+        proses = namafileakun['e-money'] + topup
+        namafileakun['e-money'] = proses
+        print('Top Up Berhasil')
+        pilihan = input('Apakah ingin top up lagi? (YA/TIDAK): ')
+        if pilihan == 'TIDAK':
+            menu()
+            break
+
 
 
 def cek_akun():
@@ -258,17 +269,17 @@ def cek_akun():
         print('1. Lihat Akun ')
         print('2. Lihat game ')
         print('3. Hapus Akun ')
-        try:
-            pilihan = input("Silahkan Masukkan Pilihan Anda: ")
-            if pilihan == "1":
-                lihat_akun()
-            elif pilihan == "2":
-                game_dibeli()
-            elif pilihan == "3":
-                hapus_akun()
-            else:
-                print("Pilihan tidak tersedia")
-        except ValueError:
-            print("Pilihan tidak sesuai \nSilahkan Masukkan Pilihan Anda Kembali")
+        pilihan_akun = input('Silahkan Pilih Login: ')
+        if pilihan_akun == "1":
+            akun_user()
+        elif pilihan_akun == '2':
+            game_user()
+        elif pilihan_akun == '3':
+            exit()
+        else:
+            print('Pilihan Tidak Valid.')
+    
+def akun_user():
+    None #Sementara
 
 login()
