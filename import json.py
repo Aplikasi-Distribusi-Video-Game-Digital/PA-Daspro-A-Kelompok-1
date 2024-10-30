@@ -108,19 +108,39 @@ def menu_admin():
             print('Pilihan Tidak Tersedia')
 
 def tambah_game():
+   
+    with open(namafilegame, "r") as file_game:
+        content = file_game.read().strip()
+        data_games = json.load(file_game) if file_game.read() else []
+
     while True:
+       
         nama = input('Masukkan Nama Game: ')
         rilis = input('Masukkan Tanggal Rilis Game: ')
         pengembang = input('Masukkan Nama Pengembang Game: ')
         genre = input('Masukkan Genre Game: ')
         deskripsi = input('Masukkan Deskripsi Game: ')
-        game_list(nama, rilis, pengembang, genre, deskripsi)
-        print('==============================================')
+        harga = input('Masukkan Harga Game: ')
+
+        game_baru = {
+            "nama": nama,
+            "rilis": rilis,
+            "pengembang": pengembang,
+            "genre": genre,
+            "deskripsi": deskripsi,
+            "harga": harga
+        }
+        data_games.append(game_baru)
+
         print(f'Game dengan Nama {nama} Berhasil Ditambahkan')
-        print('----------------------------------------------')
-        pilihan = input('Apakah Ingin Menambah Game Lagi (YA/TIDAK): ') 
+        
+        pilihan = input('Apakah Ingin Menambah Game Lagi (YA/TIDAK): ')
         if pilihan.upper() == 'TIDAK':
             break
+
+    with open(namafilegame, "w") as file_game:
+        json.dump(data_games, file_game, indent=4)
+    print("Semua data game berhasil disimpan.")
 
 def lihat_game():
     table.clear_rows() 

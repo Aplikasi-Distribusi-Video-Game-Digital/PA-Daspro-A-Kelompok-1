@@ -1,5 +1,13 @@
 [
     {
+        "nama": "iyas",
+        "rilis": "iyastama",
+        "pengembang": "iyas",
+        "genre": "iyas",
+        "deskripsi": "utas",
+        "harga": "iyas"
+    },
+    {
         "nama": "Mobile Legends",
         "rilis": "2017",
         "pengembang": "iyas",
@@ -16,19 +24,20 @@
         "harga": "iyas"
     },
     {
+        "nama": "epep",
+        "rilis": "2017",
+        "pengembang": "garena",
+        "genre": "penembakan sekolah",
+        "deskripsi": "pintu",
+        "harga": "20000"
+    },
+    {
         "nama": "Hogwarts Legacy",
         "rilis": "2023",
         "pengembang": "Warner Bros",
-        "genre": "Magic, Fantasy, Open World",
-        "deskripsi": "iyas",
-        "harga": "iyas"
-    },
-    {
-        "nama": "The Sims 4",
-        "rilis": "2014",
-        "pengembang": "Electrinic Arts",
-        "genre": "Life Sim",
-        "deskripsi": "Play with life and discover the possibilities. Unleash your imagination and create a world of Sims that’s wholly unique. Explore and customize every detail from Sims to homes–and much more.",
-        "harga": "40000"
+        "genre": "Fantasy",
+        "deskripsi": "Asik",
+        "harga": "500000"
     }
 ]
+
