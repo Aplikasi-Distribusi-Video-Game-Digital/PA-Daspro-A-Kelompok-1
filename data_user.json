@@ -8,5 +8,11 @@
         "username": "user1",
         "password": "12345",
         "role": "user"
+    },
+    {
+        "username": "iyas",
+        "password": "iyastama",
+        "email": "iyas@iyas.com",
+        "role": "user"
     }
 ]
