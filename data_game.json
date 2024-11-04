@@ -46,5 +46,13 @@
         "genre": "h",
         "deskripsi": "j",
         "harga": "k"
+    },
+    {
+        "nama": "asfa",
+        "rilis": "sdf",
+        "pengembang": "sadf",
+        "genre": "sdaf",
+        "deskripsi": "asdf",
+        "harga": "sdf"
     }
 ]
