@@ -62,27 +62,32 @@ def belum_ada_akun():
         data = []
 
     while True:
-        regis_username = input('Masukkan Username Anda: ')
+        regis_username = input('Masukkan Username Anda: ').strip()
+        
+        if " " in regis_username:
+            print("Username tidak boleh mengandung spasi. Silakan masukkan username lain.")
+            continue
+        if username_terpakai(data, regis_username):
+            print("Username telah terpakai. Silakan masukkan username lain.")
+            continue
+
         password = pwinput.pwinput('Masukkan Password Anda: ')
         telepon = input('Masukkan Telepon Anda: ')
 
-        if username_terpakai(data, regis_username):
-            print('Username telah terpakai. Silahkan masukkan username lain.')
-        else:
-            break
-
-    akun_baru = {
-        "username": regis_username,
-        "password": password,
-        "telepon": telepon,
-        "role": "user"
-    }
-    data.append(akun_baru)
-    with open(namafileakun, "w") as file:
-        json.dump(data, file, indent=4)
-    print("Berhasil Membuat Akun")
-    ada_akun()
-
+        akun_baru = {
+            "username": regis_username,
+            "password": password,
+            "telepon": telepon,
+            "role": "user"
+        }
+        data.append(akun_baru)
+        
+        with open(namafileakun, "w") as file:
+            json.dump(data, file, indent=4)
+        
+        print("Berhasil Membuat Akun")
+        ada_akun()
+        break  
 table = PrettyTable()
 table.field_names = ['No', 'Nama Game', 'Tanggal Rilis Game', 'Pengembang Game', 'Genre Game', 'Deskripsi Game']
 
@@ -276,6 +281,8 @@ def search_game():
             print(f"Nama: {game['nama']}, Rilis: {game['rilis']}, Pengembang: {game['pengembang']}, Genre: {game['genre']}, Deskripsi: {game['deskripsi']}, Harga: {game['harga']}")
     else:
         print("Tidak ada game yang cocok.")
+
+def sorting():
 
 def cek_saldo():
     while True:
