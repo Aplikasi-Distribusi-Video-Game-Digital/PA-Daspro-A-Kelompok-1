@@ -24,35 +24,11 @@
         "harga": "500000"
     },
     {
-        "nama": "s",
-        "rilis": "s",
+        "nama": "tes",
+        "rilis": "tes",
         "pengembang": "s",
         "genre": "s",
         "deskripsi": "s",
         "harga": "s"
-    },
-    {
-        "nama": "m",
-        "rilis": "m",
-        "pengembang": "y",
-        "genre": "m",
-        "deskripsi": "y",
-        "harga": "mm"
-    },
-    {
-        "nama": "d",
-        "rilis": "f",
-        "pengembang": "g",
-        "genre": "h",
-        "deskripsi": "j",
-        "harga": "k"
-    },
-    {
-        "nama": "asfa",
-        "rilis": "sdf",
-        "pengembang": "sadf",
-        "genre": "sdaf",
-        "deskripsi": "asdf",
-        "harga": "sdf"
     }
 ]

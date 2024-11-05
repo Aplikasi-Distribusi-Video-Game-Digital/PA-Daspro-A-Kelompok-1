@@ -121,12 +121,16 @@ def tambah_game():
         data_games = []
 
     while True:
-        nama = input('Masukkan Nama Game: ')
-        rilis = input('Masukkan Tanggal Rilis Game: ')
-        pengembang = input('Masukkan Nama Pengembang Game: ')
-        genre = input('Masukkan Genre Game: ')
-        deskripsi = input('Masukkan Deskripsi Game: ')
-        harga = input('Masukkan Harga Game: ')
+        nama = input('Masukkan Nama Game: ').strip()
+        rilis = input('Masukkan Tanggal Rilis Game: ').strip()
+        pengembang = input('Masukkan Nama Pengembang Game: ').strip()
+        genre = input('Masukkan Genre Game: ').strip()
+        deskripsi = input('Masukkan Deskripsi Game: ').strip()
+        harga = input('Masukkan Harga Game: ').strip()
+
+        if not (nama and rilis and pengembang and genre and deskripsi and harga):
+            print("Semua kolom harus diisi!")
+            continue 
 
         game_baru = {
             "nama": nama,
@@ -227,7 +231,7 @@ def menu_pengguna():
         print('=====================================')        
         pilihan = input('Silahkan Masukkan Pilihan Anda: ')
         if pilihan == '1':
-            searching()
+            search_game()
         elif pilihan == '2':
             sorting()
         elif pilihan == '3':
@@ -242,6 +246,36 @@ def menu_pengguna():
                 menu_pengguna()
         else:
             print('Pilihan Tidak Tersedia')
+
+def search_game():
+    keyword = input('Masukkan kata kunci pencarian: ').lower()
+
+    try:
+        with open(namafilegame, "r") as file_game:
+            data_games = json.load(file_game)
+            print("Data game berhasil dimuat:")
+            print(data_games)  
+    except FileNotFoundError:
+        print("Data game tidak ditemukan.")
+        return
+
+    found_games = []
+    for game in data_games:
+        print(f'Memproses game: {game}')  
+        if (keyword in game.get("nama", "").lower() or 
+            keyword in game.get("rilis", "").lower() or 
+            keyword in game.get("pengembang", "").lower() or 
+            keyword in game.get("genre", "").lower() or 
+            keyword in game.get("deskripsi", "").lower() or 
+            keyword in game.get("harga", "").lower()):
+            found_games.append(game)
+
+    if found_games:
+        print("\nGame yang cocok:")
+        for game in found_games:
+            print(f"Nama: {game['nama']}, Rilis: {game['rilis']}, Pengembang: {game['pengembang']}, Genre: {game['genre']}, Deskripsi: {game['deskripsi']}, Harga: {game['harga']}")
+    else:
+        print("Tidak ada game yang cocok.")
 
 def cek_saldo():
     while True:
@@ -258,7 +292,7 @@ def cek_saldo():
         print('Top Up Berhasil')
         pilihan = input('Apakah ingin top up lagi? (YA/TIDAK): ')
         if pilihan == 'TIDAK':
-            menu()
+            menu_pengguna()
             break
 
 
