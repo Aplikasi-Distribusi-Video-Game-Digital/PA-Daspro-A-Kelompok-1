@@ -1,7 +1,7 @@
 import json
 import pwinput
 import os
-import time 
+from datetime import datetime
 from prettytable import PrettyTable
 
 print('☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬ ☬')
@@ -121,9 +121,9 @@ def tambah_game():
     try:
         with open(namafilegame, "r") as file_game:
             baca = file_game.read().strip()
-            data_games = json.loads(baca) if baca else []
+            data_game = json.loads(baca) if baca else []
     except FileNotFoundError:
-        data_games = []
+        data_game = []
 
     while True:
         nama = input('Masukkan Nama Game: ').strip()
@@ -145,7 +145,7 @@ def tambah_game():
             "deskripsi": deskripsi,
             "harga": harga
         }
-        data_games.append(game_baru)
+        data_game.append(game_baru)
 
         print(f'Game dengan Nama {nama} Berhasil Ditambahkan')
         
@@ -154,15 +154,15 @@ def tambah_game():
             break
 
     with open(namafilegame, "w") as file_game:
-        json.dump(data_games, file_game, indent=4)
+        json.dump(data_game, file_game, indent=4)
     print("Semua data game berhasil disimpan.")
 
 def lihat_game():
     table.clear_rows() 
     try:
         with open(namafilegame, "r") as file_game:
-            data_games = json.load(file_game)
-            for game in data_games:
+            data_game = json.load(file_game)
+            for game in data_game:
                 game_list(
                     game.get("nama"),
                     game.get("rilis"),
@@ -176,14 +176,14 @@ def lihat_game():
 
 def perbarui_game():
     with open(namafilegame, "r") as file_game:
-        data_games = json.load(file_game)
+        data_game = json.load(file_game)
 
     lihat_game() 
     print('\n========== Perbarui Game ==========')
     
     nomor = int(input('Masukkan Nomor Game Yang Ingin Diperbarui: ')) - 1  
-    if 0 <= nomor < len(data_games):
-        game = data_games[nomor]
+    if 0 <= nomor < len(data_game):
+        game = data_game[nomor]
         
         game["nama"] = input('Masukkan Nama Game (kosongkan jika tidak ada perubahan): ') or game["nama"]
         game["rilis"] = input('Masukkan Tanggal Rilis Game (kosongkan jika tidak ada perubahan): ') or game["rilis"]
@@ -195,34 +195,36 @@ def perbarui_game():
         print(f'Game dengan nomor {nomor + 1} berhasil diperbarui.')
 
         with open(namafilegame, "w") as file_game:
-            json.dump(data_games, file_game, indent=4)
+            json.dump(data_game, file_game, indent=4)
     else:
         print(f'Game dengan nomor {nomor + 1} tidak ditemukan.')
 
 def hapus_game():
     with open(namafilegame, "r") as file_game:
-        data_games = json.load(file_game)
+        data_game = json.load(file_game)
     lihat_game()
     print('\n========== Hapus Game ==========')
     
     nomor = int(input('Masukkan Nomor Game Yang Ingin Dihapus: ')) - 1 
-    if 0 <= nomor < len(data_games):
-        game_pilih = data_games[nomor]
+    if 0 <= nomor < len(data_game):
+        game_pilih = data_game[nomor]
         nama_game = game_pilih["nama"]
         konfirmasi = input(f'Apakah Anda yakin ingin menghapus game "{nama_game}"? (YA/TIDAK): ')
         
         if konfirmasi.upper() == 'YA':
-            data_games.remove(game_pilih)
+            data_game.remove(game_pilih)
             print(f'Game "{nama_game}" berhasil dihapus.')
 
             with open(namafilegame, "w") as file_game:
-                json.dump(data_games, file_game, indent=4)
+                json.dump(data_game, file_game, indent=4)
         else:
             print("Penghapusan dibatalkan.")
     else:
         print(f'Game dengan nomor {nomor + 1} tidak ditemukan.')
 
 def menu_pengguna():
+    print("=== Debug: Masuk ke menu_pengguna ===")  # Debug: Menu pengguna
+
     while True:
         os.system('cls')
         print('=====================================')        
@@ -236,6 +238,7 @@ def menu_pengguna():
         print('=====================================')        
         pilihan = input('Silahkan Masukkan Pilihan Anda: ')
         if pilihan == '1':
+            print("=== Debug: Pilihan searching dipilih ===")  # Debug: Pilihan 1
             search_game()
         elif pilihan == '2':
             sorting()
@@ -253,28 +256,49 @@ def menu_pengguna():
             print('Pilihan Tidak Tersedia')
 
 def search_game():
-    keyword = input('Masukkan kata kunci pencarian: ').lower()
+    print("=== Debug: Fungsi search_game dipanggil ===")  # Debug awal fungsi
 
+    keyword = input('Masukkan kata kunci pencarian: ').strip().lower()  # Hilangkan spasi dan ubah ke huruf kecil
+    print(f"=== Debug: Kata kunci pencarian: {keyword} ===")  # Debug untuk kata kunci
+
+    # Cek jika file bisa dibuka dan dibaca
     try:
         with open(namafilegame, "r") as file_game:
             data_games = json.load(file_game)
-            print("Data game berhasil dimuat:")
-            print(data_games)  
+            print("\n=== Debug: Data game berhasil dimuat dari file ===")  # Debug saat data berhasil dimuat
+            print("Jumlah game dalam data:", len(data_games))  # Debug: Jumlah game
+            if not data_games:
+                print("Data game kosong atau tidak ditemukan.")
+                return
     except FileNotFoundError:
-        print("Data game tidak ditemukan.")
+        print("Data game tidak ditemukan.")  # File tidak ditemukan
+        return
+    except json.JSONDecodeError as e:
+        print(f"Error saat membaca file JSON: {e}")  # Error format JSON
         return
 
+    # Proses pencarian
     found_games = []
     for game in data_games:
-        print(f'Memproses game: {game}')  
-        if (keyword in game.get("nama", "").lower() or 
-            keyword in game.get("rilis", "").lower() or 
-            keyword in game.get("pengembang", "").lower() or 
-            keyword in game.get("genre", "").lower() or 
-            keyword in game.get("deskripsi", "").lower() or 
-            keyword in game.get("harga", "").lower()):
-            found_games.append(game)
+        nama = str(game.get("nama", "")).lower()
+        rilis = str(game.get("rilis", "")).lower()
+        pengembang = str(game.get("pengembang", "")).lower()
+        genre = str(game.get("genre", "")).lower()
+        deskripsi = str(game.get("deskripsi", "")).lower()
+        harga = str(game.get("harga", "")).lower()
 
+        print(f"\n=== Debug: Game yang sedang diproses ===")
+        print(f"Nama: {nama}, Rilis: {rilis}, Pengembang: {pengembang}, Genre: {genre}, Deskripsi: {deskripsi}, Harga: {harga}")  # Debug setiap game
+
+        # Kondisi pencocokan kata kunci
+        if (keyword in nama or keyword in rilis or keyword in pengembang or 
+            keyword in genre or keyword in deskripsi or keyword in harga):
+            print("=== Debug: Game cocok ditemukan ===")  # Debug jika game cocok
+            found_games.append(game)
+        else:
+            print("=== Debug: Game tidak cocok ===")  # Debug jika game tidak cocok
+
+    # Tampilkan hasil pencarian
     if found_games:
         print("\nGame yang cocok:")
         for game in found_games:
@@ -283,6 +307,36 @@ def search_game():
         print("Tidak ada game yang cocok.")
 
 def sorting():
+    try:
+        with open(namafilegame, "r") as file_game:
+            data_game = json.load(file_game)
+    except FileNotFoundError:
+        print("Data game tidak ditemukan.")
+        return
+
+    print("\n========== Sorting Game ==========")
+    print("1. Sortir Berdasarkan Game Terbaru")
+    print("2. Sortir Berdasarkan Harga Tertinggi")
+    print("3. Sortir Berdasarkan Harga Terendah")
+    pilihan = input("Silahkan Pilih Opsi Sorting (1/2/3): ")
+
+    if pilihan == '1':
+        data_game.sort(key=lambda game: game.get("rilis", ""), reverse=True)
+        print("\nDaftar Game Berdasarkan Tanggal Rilis (Terbaru ke Terlama):")
+    elif pilihan == '2':
+        data_game.sort(key=lambda game: int(game.get("harga", 0)), reverse=True)
+        print("\nDaftar Game Berdasarkan Harga (Tertinggi ke Terendah):")
+    elif pilihan == '3':
+        data_game.sort(key=lambda game: int(game.get("harga", 0)))
+        print("\nDaftar Game Berdasarkan Harga (Terendah ke Tertinggi):")
+    else:
+        print("Pilihan tidak valid.")
+        return
+
+    # Tampilkan hasil sorting
+    for game in data_game:
+        print(f"Nama: {game['nama']}, Rilis: {game['rilis']}, Pengembang: {game['pengembang']}, Genre: {game['genre']}, Deskripsi: {game['deskripsi']}, Harga: {game['harga']}")
+
 
 def cek_saldo():
     while True:
@@ -320,7 +374,4 @@ def cek_akun():
         else:
             print('Pilihan Tidak Valid.')
     
-def akun_user():
-    None #Sementara
-
 login()
