@@ -151,6 +151,54 @@ def tambah_game():
         json.dump(data_game, file_game, indent=4)
     print("Semua data game berhasil disimpan.")
 
+def perbarui_game():
+    with open(namafilegame, "r") as file_game:
+        data_games = json.load(file_game)
+
+    lihat_game() 
+    print('\n========== Perbarui Game ==========')
+    
+    nomor = int(input('Masukkan Nomor Game Yang Ingin Diperbarui: ')) - 1  
+    if 0 <= nomor < len(data_games):
+        game = data_games[nomor]
+        
+        game["nama"] = input('Masukkan Nama Game (kosongkan jika tidak ada perubahan): ') or game["nama"]
+        game["rilis"] = input('Masukkan Tanggal Rilis Game (kosongkan jika tidak ada perubahan): ') or game["rilis"]
+        game["pengembang"] = input('Masukkan Nama Pengembang Game (kosongkan jika tidak ada perubahan): ') or game["pengembang"]
+        game["genre"] = input('Masukkan Genre Game (kosongkan jika tidak ada perubahan): ') or game["genre"]
+        game["deskripsi"] = input('Masukkan Deskripsi Game (kosongkan jika tidak ada perubahan): ') or game["deskripsi"]
+        game["harga"] = input('Masukkan Harga Game (kosongkan jika tidak ada perubahan): ') or game["harga"]
+
+        print(f'Game dengan nomor {nomor + 1} berhasil diperbarui.')
+
+        with open(namafilegame, "w") as file_game:
+            json.dump(data_games, file_game, indent=4)
+    else:
+        print(f'Game dengan nomor {nomor + 1} tidak ditemukan.')
+
+def hapus_game():
+    with open(namafilegame, "r") as file_game:
+        data_games = json.load(file_game)
+    lihat_game()
+    print('\n========== Hapus Game ==========')
+    
+    nomor = int(input('Masukkan Nomor Game Yang Ingin Dihapus: ')) - 1 
+    if 0 <= nomor < len(data_games):
+        game_pilih = data_games[nomor]
+        nama_game = game_pilih["nama"]
+        konfirmasi = input(f'Apakah Anda yakin ingin menghapus game "{nama_game}"? (YA/TIDAK): ')
+        
+        if konfirmasi.upper() == 'YA':
+            data_games.remove(game_pilih)
+            print(f'Game "{nama_game}" berhasil dihapus.')
+
+            with open(namafilegame, "w") as file_game:
+                json.dump(data_games, file_game, indent=4)
+        else:
+            print("Penghapusan dibatalkan.")
+    else:
+        print(f'Game dengan nomor {nomor + 1} tidak ditemukan.')
+
 def lihat_game():
     table = PrettyTable()
     table.field_names = ['No', 'Nama Game', 'Tanggal Rilis', 'Pengembang', 'Genre', 'Deskripsi', 'Harga']
