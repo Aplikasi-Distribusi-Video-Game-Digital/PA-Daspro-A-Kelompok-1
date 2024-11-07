@@ -5,7 +5,7 @@
         "pengembang": "iyas",
         "genre": "Mystery",
         "deskripsi": "Banyak dark sistem",
-        "harga": "20000000"
+        "harga": 20000000
     },
     {
         "nama": "epep",
@@ -13,7 +13,7 @@
         "pengembang": "garena",
         "genre": "penembakan sekolah",
         "deskripsi": "pintu",
-        "harga": "20000"
+        "harga": 20000
     },
     {
         "nama": "Hogwarts Legacy",
@@ -21,7 +21,7 @@
         "pengembang": "Warner Bros",
         "genre": "Fantasy",
         "deskripsi": "Asik",
-        "harga": "500000"
+        "harga": 500000
     },
     {
         "nama": "iyas",
@@ -29,6 +29,6 @@
         "pengembang": "iyas",
         "genre": "iyas",
         "deskripsi": "iyas",
-        "harga": "400000"
+        "harga": 400000
     }
 ]

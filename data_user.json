@@ -9,7 +9,14 @@
         "username": "user1",
         "password": "12345",
         "telepon": "08123456778",
-        "saldo": 0,
+        "saldo": 300000,
         "role": "user"
+    },
+    {
+        "username": "iyastama",
+        "password": "iyas1234",
+        "telepon": "083876854100",
+        "role": "user",
+        "saldo": 800000
     }
 ]

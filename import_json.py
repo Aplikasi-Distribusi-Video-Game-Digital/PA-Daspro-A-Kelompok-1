@@ -42,7 +42,7 @@ def ada_akun():
             if user.get("role") == "admin":
                 menu_admin()
             elif user.get("role") == "user":
-                menu_pengguna()
+                menu_pengguna(user)
             else:
                 print(f"Selamat datang, {username}!")
             return
@@ -78,7 +78,8 @@ def belum_ada_akun():
             "username": regis_username,
             "password": password,
             "telepon": telepon,
-            "role": "user"
+            "role": "user",
+            "saldo": 0  # Saldo default saat pendaftaran
         }
         data.append(akun_baru)
         
@@ -87,15 +88,15 @@ def belum_ada_akun():
         
         print("Berhasil Membuat Akun")
         ada_akun()
-        break  
+        break    
 
 def menu_admin():
     while True:
         print('\n========== MENU ADMIN ==========')        
-        print('1. Tambah Aplikasi Video Game ')
-        print('2. Lihat Aplikasi Video Game ')
-        print('3. Perbarui Aplikasi Video Game ')
-        print('4. Hapus Aplikasi Video Game ')
+        print('1. Tambah Video Game ')
+        print('2. Lihat Video Game ')
+        print('3. Perbarui Video Game ')
+        print('4. Hapus Video Game ')
         print('5. Keluar')
         pilihan = input('Silahkan Masukkan Pilihan Anda: ')
         if pilihan == '1':
@@ -125,7 +126,7 @@ def tambah_game():
         pengembang = input('Masukkan Nama Pengembang Game: ').strip()
         genre = input('Masukkan Genre Game: ').strip()
         deskripsi = input('Masukkan Deskripsi Game: ').strip()
-        harga = input('Masukkan Harga Game: ').strip()
+        harga = int(input('Masukkan Harga Game: '))
 
         if not (nama and rilis and pengembang and genre and deskripsi and harga):
             print("Semua kolom harus diisi!")
@@ -195,7 +196,7 @@ def hapus_game():
             with open(namafilegame, "w") as file_game:
                 json.dump(data_games, file_game, indent=4)
         else:
-            print("Penghapusan dibatalkan.")
+            print("Batal Hapus")
     else:
         print(f'Game dengan nomor {nomor + 1} tidak ditemukan.')
 
@@ -216,9 +217,8 @@ def lihat_game():
     except FileNotFoundError:
         print("Data game tidak ditemukan.")
 
-def menu_pengguna():
+def menu_pengguna(user):
     while True:
-        # os.system('cls')
         print('=====================================')        
         print('|        🎀 MENU PENGGUNA 🎀        |')        
         print('=====================================')        
@@ -226,24 +226,26 @@ def menu_pengguna():
         print('|          2. Sorting               |')
         print('|          3. Cek Akun              |')
         print('|          4. Cek Saldo             |')
-        print('|          5. Keluar Akun           |')
+        print('|          5. Top Up Saldo          |')
+        print('|          6. Keluar Akun           |')
         print('=====================================')        
         pilihan = input('Silahkan Masukkan Pilihan Anda: ')
         if pilihan == '1':
-            print("=== Debug: Pilihan searching dipilih ===")  
             search_game()
         elif pilihan == '2':
             sorting()
         elif pilihan == '3':
-            cek_akun()
+            cek_akun(user)
         elif pilihan == '4':
-            cek_saldo()
+            cek_saldo(user)
         elif pilihan == '5':
+            top_up_saldo(user)
+        elif pilihan == '6':
             konfirmasi = input('Apakah ingin keluar akun (YA/TIDAK): ')
             if konfirmasi.upper() == 'YA':
                 login()
             else:
-                menu_pengguna()
+                menu_pengguna(user)
         else:
             print('Pilihan Tidak Tersedia')
 
@@ -310,5 +312,41 @@ def sorting():
         no += 1
     print("\nHasil Sorting:")
     print(table)
+
+def cek_akun(user):
+    print("\n=== Informasi Akun ===")
+    print(f"Username: {user['username']}")
+    print(f"Telepon: {user['telepon']}")
+    print(f"Saldo: Rp {user['saldo']}")
+
+def cek_saldo(user):
+    print(f"\nSaldo Anda: Rp {user['saldo']}")
+
+def top_up_saldo(user):
+    try:
+        jumlah_topup = int(input("Masukkan jumlah saldo yang ingin ditambahkan: "))
+        if jumlah_topup > 0:
+            user['saldo'] += jumlah_topup
+            update_user_data(user)
+            print(f"Saldo berhasil ditambahkan. Saldo Anda sekarang: Rp {user['saldo']}")
+        else:
+            print("Jumlah saldo harus positif.")
+    except ValueError:
+        print("Input tidak valid. Harap masukkan angka.")
+
+def update_user_data(user):
+    try:
+        with open(namafileakun, "r") as file:
+            data = json.load(file)
+        
+        for data_user in data:
+            if data_user['username'] == user['username']:
+                data_user.update(user)  
+                break
+
+        with open(namafileakun, "w") as file:
+            json.dump(data, file, indent=4)
+    except FileNotFoundError:
+        print("Data akun tidak ditemukan.")
 
 login()
