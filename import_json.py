@@ -79,7 +79,7 @@ def belum_ada_akun():
             "password": password,
             "telepon": telepon,
             "role": "user",
-            "saldo": 0  # Saldo default saat pendaftaran
+            "saldo": 0  
         }
         data.append(akun_baru)
         
@@ -126,9 +126,15 @@ def tambah_game():
         pengembang = input('Masukkan Nama Pengembang Game: ').strip()
         genre = input('Masukkan Genre Game: ').strip()
         deskripsi = input('Masukkan Deskripsi Game: ').strip()
-        harga = int(input('Masukkan Harga Game: '))
+        
+        while True:
+            try:
+                harga = int(input('Masukkan Harga Game: '))
+                break  
+            except ValueError:
+                print("Harga harus angka.")
 
-        if not (nama and rilis and pengembang and genre and deskripsi and harga):
+        if not (nama and rilis and pengembang and genre and deskripsi):
             print("Semua kolom harus diisi!")
             continue 
 

@@ -18,5 +18,12 @@
         "telepon": "083876854100",
         "role": "user",
         "saldo": 800000
+    },
+    {
+        "username": "iys",
+        "password": "i",
+        "telepon": "22222",
+        "role": "user",
+        "saldo": 0
     }
 ]
