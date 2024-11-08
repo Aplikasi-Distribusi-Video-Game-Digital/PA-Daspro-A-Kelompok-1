@@ -239,7 +239,7 @@ def menu_pengguna(user):
         if pilihan == '1':
             search_game()
         elif pilihan == '2':
-            sorting()
+            sorting(user)
         elif pilihan == '3':
             cek_akun(user)
         elif pilihan == '4':
@@ -254,6 +254,24 @@ def menu_pengguna(user):
                 menu_pengguna(user)
         else:
             print('Pilihan Tidak Tersedia')
+
+def beli_game(user, game):
+    #saldo tidak cukup
+    if user['saldo'] < game['harga']:
+        print(f"Saldo anda tidak cukup. Harga: Rp. {game['harga']}")
+        return
+    
+    #sudah punya game
+    for game_dibeli in user.get("pembelian", []):
+        if game_dibeli['nama'] == game['nama']:
+            print(f"Anda sudah memiliki game {game['nama']} ")
+            return
+    
+    #pembelian
+    user['saldo'] -= game['harga']
+    user.setdefault("pembelian", []).append(game)
+    update_user_data(user)
+    print(f"Game \"{game['nama']}\" berhasil dibeli! Saldo sekarang: Rp {user['saldo']}")
 
 def search_game():
     keyword = input('Masukkan kata kunci pencarian: ').strip().lower()
@@ -283,7 +301,7 @@ def search_game():
     else:
         print("Tidak ada game yang cocok.")
 
-def sorting():
+def sorting(user):
     try:
         with open(namafilegame, "r") as file_game:
             data_game = json.load(file_game)
@@ -309,7 +327,7 @@ def sorting():
 
     table = PrettyTable()
     table.field_names = ['No', 'Nama Game', 'Tanggal Rilis', 'Pengembang', 'Genre', 'Deskripsi', 'Harga']
-    no = 1
+    no = 1  
     for game in data_game:
         table.add_row([
             no, game['nama'], game['rilis'], game['pengembang'], game['genre'], 
@@ -319,11 +337,33 @@ def sorting():
     print("\nHasil Sorting:")
     print(table)
 
+    #pilih game untuk dibeli
+    try:
+        pilihan_game = int(input("Masukkan nomor game yang ingin dibeli, 0 untuk batal: ")) - 1
+        if pilihan_game == -1:
+            print("Batal membeli game.")
+            return
+        if 0 <= pilihan_game < len(data_game):
+            game_terpilih = data_game[pilihan_game]
+            beli_game(user, game_terpilih)
+        else:
+            print("Nomor game tidak valid.")
+    except ValueError:
+        print("Input tidak valid. Harap masukkan angka.")
+
 def cek_akun(user):
-    print("\n=== Informasi Akun ===")
+    print("\n===== Informasi Akun =====")
     print(f"Username: {user['username']}")
     print(f"Telepon: {user['telepon']}")
     print(f"Saldo: Rp {user['saldo']}")
+    
+    pembelian = user.get("pembelian", [])
+    if pembelian:
+        print("\nGame dimiliki: ")
+        for game in pembelian:
+            print(f"- {game['nama']}")
+    else:
+        print("\nBelum punya game.")
 
 def cek_saldo(user):
     print(f"\nSaldo Anda: Rp {user['saldo']}")

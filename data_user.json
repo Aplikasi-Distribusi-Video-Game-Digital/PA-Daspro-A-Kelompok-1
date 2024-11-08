@@ -9,8 +9,18 @@
         "username": "user1",
         "password": "12345",
         "telepon": "08123456778",
-        "saldo": 300000,
-        "role": "user"
+        "saldo": 200000,
+        "role": "user",
+        "pembelian": [
+            {
+                "nama": "Hogwarts Legacy",
+                "rilis": "2023",
+                "pengembang": "Warner Bros",
+                "genre": "Fantasy",
+                "deskripsi": "Asik",
+                "harga": 500000
+            }
+        ]
     },
     {
         "username": "iyastama",
@@ -24,6 +34,7 @@
         "password": "i",
         "telepon": "22222",
         "role": "user",
-        "saldo": 0
+        "saldo": 0,
+        "pembelian": []
     }
 ]
