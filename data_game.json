@@ -1,34 +1,51 @@
 [
     {
-        "nama": "Mobile Legends",
-        "rilis": "2017",
-        "pengembang": "iyas",
-        "genre": "Mystery",
-        "deskripsi": "Banyak dark sistem",
-        "harga": 20000000
-    },
-    {
-        "nama": "epep",
-        "rilis": "2017",
-        "pengembang": "garena",
-        "genre": "penembakan sekolah",
-        "deskripsi": "pintu",
+        "nama": "Free Fire",
+        "rilis": "4 Desember 2017",
+        "pengembang": "Garena",
+        "genre": "Permainan Battle Royale",
         "harga": 20000
     },
     {
         "nama": "Hogwarts Legacy",
-        "rilis": "2023",
+        "rilis": "10 Februari 2023",
         "pengembang": "Warner Bros",
         "genre": "Fantasy",
-        "deskripsi": "Asik",
         "harga": 500000
     },
     {
-        "nama": "iyas",
-        "rilis": "iyas",
-        "pengembang": "iyas",
-        "genre": "iyas",
-        "deskripsi": "iyas",
-        "harga": 400000
+        "nama": "Green Hell",
+        "rilis": "5 September 2019",
+        "pengembang": "Creepy Jar",
+        "genre": "Aksi, Petualangan",
+        "harga": 40000
+    },
+    {
+        "nama": "Hades",
+        "rilis": "10 Desember 2019",
+        "pengembang": "Supergiant Games",
+        "genre": "Aksi, Indie, RPG",
+        "harga": 37000
+    },
+    {
+        "nama": "First Dwarf",
+        "rilis": "20 Juni 2020",
+        "pengembang": "Star Drifters",
+        "genre": "Aksi, Petualangan, RPG",
+        "harga": 154000
+    },
+    {
+        "nama": "Battle Ram",
+        "rilis": "6 Januari 2023",
+        "pengembang": "Runic Rise Games",
+        "genre": "Aksi, Petualangan, Simulasi, Olahraga",
+        "harga": 15000
+    },
+    {
+        "nama": "Football Manager 2024",
+        "rilis": "6 November 2023",
+        "pengembang": "Sports Interactive",
+        "genre": "Simulasi, Olahraga, Strategi",
+        "harga": 650000
     }
 ]

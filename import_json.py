@@ -1,6 +1,5 @@
 import json
 import pwinput
-import os
 from datetime import datetime
 from prettytable import PrettyTable
 
@@ -125,7 +124,6 @@ def tambah_game():
         rilis = input('Masukkan Tanggal Rilis Game: ').strip()
         pengembang = input('Masukkan Nama Pengembang Game: ').strip()
         genre = input('Masukkan Genre Game: ').strip()
-        deskripsi = input('Masukkan Deskripsi Game: ').strip()
         
         while True:
             try:
@@ -134,7 +132,7 @@ def tambah_game():
             except ValueError:
                 print("Harga harus angka.")
 
-        if not (nama and rilis and pengembang and genre and deskripsi):
+        if not (nama and rilis and pengembang and genre):
             print("Semua kolom harus diisi!")
             continue 
 
@@ -143,7 +141,6 @@ def tambah_game():
             "rilis": rilis,
             "pengembang": pengembang,
             "genre": genre,
-            "deskripsi": deskripsi,
             "harga": harga
         }
         data_game.append(game_baru)
@@ -173,7 +170,6 @@ def perbarui_game():
         game["rilis"] = input('Masukkan Tanggal Rilis Game (kosongkan jika tidak ada perubahan): ') or game["rilis"]
         game["pengembang"] = input('Masukkan Nama Pengembang Game (kosongkan jika tidak ada perubahan): ') or game["pengembang"]
         game["genre"] = input('Masukkan Genre Game (kosongkan jika tidak ada perubahan): ') or game["genre"]
-        game["deskripsi"] = input('Masukkan Deskripsi Game (kosongkan jika tidak ada perubahan): ') or game["deskripsi"]
         game["harga"] = input('Masukkan Harga Game (kosongkan jika tidak ada perubahan): ') or game["harga"]
 
         print(f'Game dengan nomor {nomor + 1} berhasil diperbarui.')
@@ -208,7 +204,7 @@ def hapus_game():
 
 def lihat_game():
     table = PrettyTable()
-    table.field_names = ['No', 'Nama Game', 'Tanggal Rilis', 'Pengembang', 'Genre', 'Deskripsi', 'Harga']
+    table.field_names = ['No', 'Nama Game', 'Tanggal Rilis', 'Pengembang', 'Genre', 'Harga']
     try:
         with open(namafilegame, "r") as file_game:
             data_game = json.load(file_game)
@@ -216,7 +212,7 @@ def lihat_game():
             for game in data_game:
                 table.add_row([
                     no, game.get("nama"), game.get("rilis"), game.get("pengembang"), 
-                    game.get("genre"), game.get("deskripsi"), game.get("harga")
+                    game.get("genre"), game.get("harga")
                 ])
                 no += 1
         print(table)
@@ -288,12 +284,11 @@ def search_game(user):
 
     if found_games:
         table = PrettyTable()
-        table.field_names = ['No', 'Nama Game', 'Tanggal Rilis', 'Pengembang', 'Genre', 'Deskripsi', 'Harga']
+        table.field_names = ['No', 'Nama Game', 'Tanggal Rilis', 'Pengembang', 'Genre', 'Harga']
         no = 1
         for game in found_games:
             table.add_row([
-                no, game['nama'], game['rilis'], game['pengembang'], game['genre'], 
-                game['deskripsi'], game['harga']
+                no, game['nama'], game['rilis'], game['pengembang'], game['genre'], game['harga']
             ])
             no += 1
         print("\nHasil Pencarian:")
@@ -339,12 +334,11 @@ def sorting(user):
         return
 
     table = PrettyTable()
-    table.field_names = ['No', 'Nama Game', 'Tanggal Rilis', 'Pengembang', 'Genre', 'Deskripsi', 'Harga']
+    table.field_names = ['No', 'Nama Game', 'Tanggal Rilis', 'Pengembang', 'Genre', 'Harga']
     no = 1  
     for game in data_game:
         table.add_row([
-            no, game['nama'], game['rilis'], game['pengembang'], game['genre'], 
-            game['deskripsi'], game['harga']
+            no, game['nama'], game['rilis'], game['pengembang'], game['genre'], game['harga']
         ])
         no += 1
     print("\nHasil Sorting:")
