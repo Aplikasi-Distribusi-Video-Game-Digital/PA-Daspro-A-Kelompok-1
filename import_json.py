@@ -251,6 +251,18 @@ def menu_pengguna(user):
         else:
             print('Pilihan Tidak Tersedia')
 
+def buat_invoice(user, game):
+    print("\n===== INVOICE/NOTA PEMBELIAN =====")
+    print(f"Tanggal: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Nama Pembeli: {user['username']}")
+    print(f"Telepon: {user['telepon']}")
+    print("\nDetail Pembelian:")
+    print(f"Nama Game: {game['nama']}")
+    print(f"Harga: Rp {game['harga']}")
+    print(f"Sisa Saldo: Rp {user['saldo']}")
+    print("=====================================")
+    print("Terima Kasih!\n")
+
 def beli_game(user, game):
     #saldo tidak cukup
     if user['saldo'] < game['harga']:
@@ -262,12 +274,13 @@ def beli_game(user, game):
         if game_dibeli['nama'] == game['nama']:
             print(f"Anda sudah memiliki game {game['nama']} ")
             return
-    
+            
     #pembelian
     user['saldo'] -= game['harga']
     user.setdefault("pembelian", []).append(game)
     update_user_data(user)
     print(f"Game \"{game['nama']}\" berhasil dibeli! Saldo sekarang: Rp {user['saldo']}")
+    buat_invoice(user, game)
 
 def search_game(user):
     keyword = input('Masukkan kata kunci pencarian: ').strip().lower()

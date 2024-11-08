@@ -43,7 +43,16 @@
         "password": "iyas1234",
         "telepon": "083876854100",
         "role": "user",
-        "saldo": 800000
+        "saldo": 1050000,
+        "pembelian": [
+            {
+                "nama": "Football Manager 2024",
+                "rilis": "6 November 2023",
+                "pengembang": "Sports Interactive",
+                "genre": "Simulasi, Olahraga, Strategi",
+                "harga": 650000
+            }
+        ]
     },
     {
         "username": "iys",
