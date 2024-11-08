@@ -9,7 +9,7 @@
         "username": "user1",
         "password": "12345",
         "telepon": "08123456778",
-        "saldo": 280000,
+        "saldo": 273000,
         "role": "user",
         "pembelian": [
             {
@@ -35,6 +35,13 @@
                 "genre": "iyas",
                 "deskripsi": "iyas",
                 "harga": 400000
+            },
+            {
+                "nama": "Hades",
+                "rilis": "10 Desember 2019",
+                "pengembang": "Supergiant Games",
+                "genre": "Aksi, Indie, RPG",
+                "harga": 37000
             }
         ]
     },
@@ -61,5 +68,11 @@
         "role": "user",
         "saldo": 0,
         "pembelian": []
+    },
+    {
+        "username": "hendri",
+        "password": "iyas",
+        "role": "user",
+        "saldo": 0
     }
 ]
