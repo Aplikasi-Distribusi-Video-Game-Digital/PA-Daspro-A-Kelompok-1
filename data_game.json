@@ -47,5 +47,12 @@
         "pengembang": "Sports Interactive",
         "genre": "Simulasi, Olahraga, Strategi",
         "harga": 650000
+    },
+    {
+        "nama": "asd",
+        "rilis": "24",
+        "pengembang": "asd",
+        "genre": "asd",
+        "harga": 40000
     }
 ]

@@ -1,10 +1,8 @@
 import json
 import pwinput
-import os
 from datetime import datetime
 import time
 from prettytable import PrettyTable
-
 
 namafileakun = 'data_user.json'
 namafilegame = 'data_game.json'
@@ -31,6 +29,7 @@ def login():
             elif pilihan_akun == 2:
                 belum_ada_akun()
             elif pilihan_akun == 3:
+                print("Terimakasih!")
                 exit()
             else:
                 print('Pilihan tidak valid dan gunakan dengan angka ')
@@ -59,6 +58,7 @@ def ada_akun():
                     print(f"Selamat datang, {username}!")
                 return
         print("Username atau password salah.")
+        input("Enter untuk lanjut")
     else:
         print("Anda melewati maksimal percobaan")
         countdown(20)
@@ -320,7 +320,6 @@ def buat_invoice(user, game):
     print("\n===== INVOICE/NOTA PEMBELIAN =====")
     print(f"Tanggal: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Nama Pembeli: {user['username']}")
-    print(f"Telepon: {user['telepon']}")
     print("\nDetail Pembelian:")
     print(f"Nama Game: {game['nama']}")
     print(f"Harga: Rp {game['harga']}")
@@ -332,6 +331,7 @@ def beli_game(user, game):
     #saldo tidak cukup
     if user['saldo'] < game['harga']:
         print(f"Saldo anda tidak cukup. Harga: Rp. {game['harga']}, Silahkan top up terlebih dahulu")
+        os.system("cls")
         menu_pengguna(user)
     
     #sudah punya game
@@ -436,11 +436,11 @@ def sorting(user):
         print('=====================================')
         pilihan = int(input("Silahkan masukkan pilihan anda: "))
         try:
-            if pilihan == '1':
+            if pilihan == 1:
                 data_game.sort(key=lambda game: game.get("rilis", ""), reverse=True)
-            elif pilihan == '2':
+            elif pilihan == 2:
                 data_game.sort(key=lambda game: int(game.get("harga", 0)), reverse=True)
-            elif pilihan == '3':
+            elif pilihan == 3:
                 data_game.sort(key=lambda game: int(game.get("harga", 0)))
             else:
                 print("Pilihan tidak valid.")

@@ -57,7 +57,7 @@
         "password": "iyas1234",
         "telepon": "083876854100",
         "role": "user",
-        "saldo": 1050000,
+        "saldo": 550000,
         "pembelian": [
             {
                 "nama": "Football Manager 2024",
@@ -65,6 +65,13 @@
                 "pengembang": "Sports Interactive",
                 "genre": "Simulasi, Olahraga, Strategi",
                 "harga": 650000
+            },
+            {
+                "nama": "Hogwarts Legacy",
+                "rilis": "10 Februari 2023",
+                "pengembang": "Warner Bros",
+                "genre": "Fantasy",
+                "harga": 500000
             }
         ]
     },
@@ -79,6 +86,27 @@
     {
         "username": "hendri",
         "password": "iyas",
+        "role": "user",
+        "saldo": 0
+    },
+    {
+        "username": "Larend",
+        "password": "686",
+        "role": "user",
+        "saldo": 9999999999999999999999999999999999846000,
+        "pembelian": [
+            {
+                "nama": "First Dwarf",
+                "rilis": "20 Juni 2020",
+                "pengembang": "Star Drifters",
+                "genre": "Aksi, Petualangan, RPG",
+                "harga": 154000
+            }
+        ]
+    },
+    {
+        "username": "Narendra",
+        "password": "686",
         "role": "user",
         "saldo": 0
     }
