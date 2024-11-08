@@ -543,5 +543,8 @@ def update_user_data(user):
     except FileNotFoundError:
         print("Data akun tidak ditemukan.")
 
-
-login()
+if __name__ == "__main__":
+    try:
+        login()
+    except KeyboardInterrupt:
+        print("\nPorgram dihentikan oleh pengguna.")

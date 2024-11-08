@@ -9,7 +9,7 @@
         "username": "user1",
         "password": "12345",
         "telepon": "08123456778",
-        "saldo": 273000,
+        "saldo": 258000,
         "role": "user",
         "pembelian": [
             {
@@ -42,6 +42,13 @@
                 "pengembang": "Supergiant Games",
                 "genre": "Aksi, Indie, RPG",
                 "harga": 37000
+            },
+            {
+                "nama": "Battle Ram",
+                "rilis": "6 Januari 2023",
+                "pengembang": "Runic Rise Games",
+                "genre": "Aksi, Petualangan, Simulasi, Olahraga",
+                "harga": 15000
             }
         ]
     },
