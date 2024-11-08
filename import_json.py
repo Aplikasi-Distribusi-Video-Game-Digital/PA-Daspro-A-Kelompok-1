@@ -237,7 +237,7 @@ def menu_pengguna(user):
         print('=====================================')        
         pilihan = input('Silahkan Masukkan Pilihan Anda: ')
         if pilihan == '1':
-            search_game()
+            search_game(user)
         elif pilihan == '2':
             sorting(user)
         elif pilihan == '3':
@@ -273,7 +273,7 @@ def beli_game(user, game):
     update_user_data(user)
     print(f"Game \"{game['nama']}\" berhasil dibeli! Saldo sekarang: Rp {user['saldo']}")
 
-def search_game():
+def search_game(user):
     keyword = input('Masukkan kata kunci pencarian: ').strip().lower()
     found_games = []
     try:
@@ -300,6 +300,19 @@ def search_game():
         print(table)
     else:
         print("Tidak ada game yang cocok.")
+
+    try:
+        pilihan_game = int(input("Masukkan nomor game yang ingin dibeli, 0 untuk batal: ")) - 1
+        if pilihan_game == -1:
+            print("Batal membeli game.")
+            return
+        if 0 <= pilihan_game < len(found_games):
+            game_terpilih = found_games[pilihan_game]
+            beli_game(user, game_terpilih)
+        else:
+            print("Nomor game tidak valid.")
+    except ValueError:
+        print("Input tidak valid. Harap masukkan angka.")
 
 def sorting(user):
     try:

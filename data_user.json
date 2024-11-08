@@ -9,7 +9,7 @@
         "username": "user1",
         "password": "12345",
         "telepon": "08123456778",
-        "saldo": 200000,
+        "saldo": 280000,
         "role": "user",
         "pembelian": [
             {
@@ -19,6 +19,22 @@
                 "genre": "Fantasy",
                 "deskripsi": "Asik",
                 "harga": 500000
+            },
+            {
+                "nama": "epep",
+                "rilis": "2017",
+                "pengembang": "garena",
+                "genre": "penembakan sekolah",
+                "deskripsi": "pintu",
+                "harga": 20000
+            },
+            {
+                "nama": "iyas",
+                "rilis": "iyas",
+                "pengembang": "iyas",
+                "genre": "iyas",
+                "deskripsi": "iyas",
+                "harga": 400000
             }
         ]
     },
