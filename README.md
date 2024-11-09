@@ -1,5 +1,13 @@
 # PA-Daspro-A-Kelompok-1
 
+INDAH PUTRI LESTARI | 2409116004 | Sistem Informasi A
+
+IRVANI MISTA CANLUSTY | 2409116019 | Sistem Informasi A
+
+LARRY POLIN ANUGRAH | 2409116026 | Sistem Informasi A
+
+HUSAINI IYASTAMA | 2409116038 | Sistem Informasi A
+
 ## FLowchart
 
 ![PA DASPRO drawio (1)](https://github.com/user-attachments/assets/970f111a-e264-4ab9-8a18-5f83c7ef486f)
