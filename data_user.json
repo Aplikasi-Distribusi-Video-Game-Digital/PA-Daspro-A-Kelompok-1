@@ -2,23 +2,51 @@
     {
         "username": "group1",
         "password": "thebest",
-        "telepon": "telepon",
         "role": "admin"
     },
     {
         "username": "user1",
         "password": "12345",
-        "telepon": "08123456778",
-        "saldo": 258000,
+        "saldo": 280000,
         "role": "user",
-        "pembelian": []
+        "pembelian": [
+            {
+                "nama": "Hogwarts Legacy",
+                "rilis": "2023",
+                "pengembang": "Warner Bros",
+                "genre": "Fantasy",
+                "deskripsi": "Asik",
+                "harga": 500000
+            },
+            {
+                "nama": "epep",
+                "rilis": "2017",
+                "pengembang": "garena",
+                "genre": "penembakan sekolah",
+                "deskripsi": "pintu",
+                "harga": 20000
+            },
+            {
+                "nama": "iyas",
+                "rilis": "iyas",
+                "pengembang": "iyas",
+                "genre": "iyas",
+                "deskripsi": "iyas",
+                "harga": 400000
+            }
+        ]
     },
     {
         "username": "iyastama",
         "password": "iyas1234",
-        "telepon": "083876854100",
         "role": "user",
-        "saldo": 490000,
+        "saldo": 800000
+    },
+    {
+        "username": "larry",
+        "password": "123",
+        "role": "user",
+        "saldo": 99990,
         "pembelian": [
             {
                 "nama": "Football Manager 2024",
@@ -28,12 +56,27 @@
                 "harga": 650000
             },
             {
-                "nama": "Hogwarts Legacy",
-                "rilis": "10 Februari 2023",
-                "pengembang": "Warner Bros",
-                "genre": "Fantasy",
-                "harga": 500000
+                "nama": "Free Fire",
+                "rilis": "4 Desember 2017",
+                "pengembang": "Garena",
+                "genre": "Permainan Battle Royale",
+                "harga": 20000
             },
+            {
+                "nama": "First Dwarf",
+                "rilis": "20 Juni 2020",
+                "pengembang": "Star Drifters",
+                "genre": "Aksi, Petualangan, RPG",
+                "harga": 154000
+            }
+        ]
+    },
+    {
+        "username": "kelompok1",
+        "password": "satu",
+        "role": "user",
+        "saldo": 287000,
+        "pembelian": [
             {
                 "nama": "Free Fire",
                 "rilis": "4 Desember 2017",
@@ -49,5 +92,11 @@
                 "harga": 40000
             }
         ]
+    },
+    {
+        "username": "indah",
+        "password": "1234",
+        "role": "user",
+        "saldo": 0
     }
 ]
