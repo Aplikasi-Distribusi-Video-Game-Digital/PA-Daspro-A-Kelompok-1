@@ -331,7 +331,7 @@ def beli_game(user, game):
     #saldo tidak cukup
     if user['saldo'] < game['harga']:
         print(f"Saldo anda tidak cukup. Harga: Rp. {game['harga']}, Silahkan top up terlebih dahulu")
-        os.system("cls")
+        input("Tekan Enter untuk lanjut.... ")
         menu_pengguna(user)
     
     #sudah punya game
