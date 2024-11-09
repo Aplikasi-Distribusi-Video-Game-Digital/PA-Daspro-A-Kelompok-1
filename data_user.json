@@ -11,46 +11,7 @@
         "telepon": "08123456778",
         "saldo": 258000,
         "role": "user",
-        "pembelian": [
-            {
-                "nama": "Hogwarts Legacy",
-                "rilis": "2023",
-                "pengembang": "Warner Bros",
-                "genre": "Fantasy",
-                "deskripsi": "Asik",
-                "harga": 500000
-            },
-            {
-                "nama": "epep",
-                "rilis": "2017",
-                "pengembang": "garena",
-                "genre": "penembakan sekolah",
-                "deskripsi": "pintu",
-                "harga": 20000
-            },
-            {
-                "nama": "iyas",
-                "rilis": "iyas",
-                "pengembang": "iyas",
-                "genre": "iyas",
-                "deskripsi": "iyas",
-                "harga": 400000
-            },
-            {
-                "nama": "Hades",
-                "rilis": "10 Desember 2019",
-                "pengembang": "Supergiant Games",
-                "genre": "Aksi, Indie, RPG",
-                "harga": 37000
-            },
-            {
-                "nama": "Battle Ram",
-                "rilis": "6 Januari 2023",
-                "pengembang": "Runic Rise Games",
-                "genre": "Aksi, Petualangan, Simulasi, Olahraga",
-                "harga": 15000
-            }
-        ]
+        "pembelian": []
     },
     {
         "username": "iyastama",
@@ -86,64 +47,6 @@
                 "pengembang": "Creepy Jar",
                 "genre": "Aksi, Petualangan",
                 "harga": 40000
-            }
-        ]
-    },
-    {
-        "username": "iys",
-        "password": "i",
-        "telepon": "22222",
-        "role": "user",
-        "saldo": 0,
-        "pembelian": []
-    },
-    {
-        "username": "Larend",
-        "password": "686",
-        "role": "user",
-        "saldo": 9999999999999999999999999999999999846000,
-        "pembelian": [
-            {
-                "nama": "First Dwarf",
-                "rilis": "20 Juni 2020",
-                "pengembang": "Star Drifters",
-                "genre": "Aksi, Petualangan, RPG",
-                "harga": 154000
-            }
-        ]
-    },
-    {
-        "username": "Narendra",
-        "password": "686",
-        "role": "user",
-        "saldo": 0
-    },
-    {
-        "username": "husaini",
-        "password": "iyas",
-        "role": "user",
-        "saldo": 399999615001,
-        "pembelian": [
-            {
-                "nama": "Hades",
-                "rilis": "10 Desember 2019",
-                "pengembang": "Supergiant Games",
-                "genre": "Aksi, Indie, RPG",
-                "harga": 37000
-            },
-            {
-                "nama": "Green Hell",
-                "rilis": "5 September 2019",
-                "pengembang": "Creepy Jar",
-                "genre": "Aksi, Petualangan",
-                "harga": 40000
-            },
-            {
-                "nama": "First Dwarf",
-                "rilis": "20 Juni 2020",
-                "pengembang": "Star Drifters",
-                "genre": "Aksi, Petualangan, RPG",
-                "harga": 154000
             }
         ]
     }
