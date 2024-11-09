@@ -302,11 +302,11 @@ def rekomendasi(user):
                 pilihan = int(input("Silahkan masukkan pilihan anda: "))
                 if pilihan == 1:
                     print(table)
-                    pilih_game = int(input('Masukkan game yang ingin dipilih: '))
+                    pilih_game = int(input('Masukkan game yang ingin dipilih: ')) -1
                     if 0 <= pilih_game < len(data_game):
                         game_terpilih = data_game[pilih_game]
                         beli_game(user, game_terpilih)
-                    print(f"Anda memilih gam: {game['nama']} dengan harga: Rp. {game['harga']}")
+                    print(f"Anda memilih game: {game_terpilih['nama']} dengan harga: Rp. {game_terpilih['harga']}")
                 elif pilihan == 2:
                     return
                 else:
@@ -346,8 +346,9 @@ def beli_game(user, game):
         user['saldo'] -= game['harga']
         user.setdefault("pembelian", []).append(game)
         update_user_data(user)
-        print(f"Game \"{game['nama']}\" berhasil dibeli! Saldo sekarang: Rp {user['saldo']}")
         buat_invoice(user, game)
+        print(f"\nGame \"{game['nama']}\" berhasil dibeli! Saldo sekarang: Rp {user['saldo']}")
+        input("Tekan Enter untuk lanjut... ")
     elif konfirmasi.upper() == 'TIDAK':
         print("Transaksi dibatalkan")
         return

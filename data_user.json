@@ -57,7 +57,7 @@
         "password": "iyas1234",
         "telepon": "083876854100",
         "role": "user",
-        "saldo": 550000,
+        "saldo": 490000,
         "pembelian": [
             {
                 "nama": "Football Manager 2024",
@@ -72,6 +72,20 @@
                 "pengembang": "Warner Bros",
                 "genre": "Fantasy",
                 "harga": 500000
+            },
+            {
+                "nama": "Free Fire",
+                "rilis": "4 Desember 2017",
+                "pengembang": "Garena",
+                "genre": "Permainan Battle Royale",
+                "harga": 20000
+            },
+            {
+                "nama": "Green Hell",
+                "rilis": "5 September 2019",
+                "pengembang": "Creepy Jar",
+                "genre": "Aksi, Petualangan",
+                "harga": 40000
             }
         ]
     },
@@ -82,12 +96,6 @@
         "role": "user",
         "saldo": 0,
         "pembelian": []
-    },
-    {
-        "username": "hendri",
-        "password": "iyas",
-        "role": "user",
-        "saldo": 0
     },
     {
         "username": "Larend",
@@ -109,5 +117,34 @@
         "password": "686",
         "role": "user",
         "saldo": 0
+    },
+    {
+        "username": "husaini",
+        "password": "iyas",
+        "role": "user",
+        "saldo": 399999615001,
+        "pembelian": [
+            {
+                "nama": "Hades",
+                "rilis": "10 Desember 2019",
+                "pengembang": "Supergiant Games",
+                "genre": "Aksi, Indie, RPG",
+                "harga": 37000
+            },
+            {
+                "nama": "Green Hell",
+                "rilis": "5 September 2019",
+                "pengembang": "Creepy Jar",
+                "genre": "Aksi, Petualangan",
+                "harga": 40000
+            },
+            {
+                "nama": "First Dwarf",
+                "rilis": "20 Juni 2020",
+                "pengembang": "Star Drifters",
+                "genre": "Aksi, Petualangan, RPG",
+                "harga": 154000
+            }
+        ]
     }
 ]
